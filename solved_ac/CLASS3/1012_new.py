@@ -1,4 +1,4 @@
-# 유기농 배추
+# 유기농 배추 (bfs를 통한 풀이)
 from collections import deque
 T = int(input())
 dx = [0,0,-1,1]
