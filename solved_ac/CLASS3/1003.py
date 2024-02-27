@@ -1,20 +1,14 @@
-import sys
-sys.setrecursionlimit(100)
-input = sys.stdin.readline
+# 피보나치 함수
 T = int(input())
-def fibonnaci(n):
-    global z_cnt, o_cnt
-    if n==0:
-        z_cnt += 1
-        return z_cnt
-    elif n==1:
-        o_cnt += 1
-        return o_cnt
-    else:
-        return fibonnaci(n-1) + fibonnaci(n-2)
-
-for tc in range(T):
-    N = int(input())
-    z_cnt, o_cnt = 0, 0
-    fibonnaci(N)
+for _ in range(T):
+    tc = int(input())
+    if tc == 0:
+        print(1, 0)
+        continue
+    elif tc == 1:
+        print(0, 1)
+        continue
+    z_cnt, o_cnt = 1, 1
+    for _ in range(2,tc):
+        z_cnt, o_cnt = o_cnt, o_cnt+z_cnt
     print(z_cnt, o_cnt)
