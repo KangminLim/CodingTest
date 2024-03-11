@@ -1,6 +1,5 @@
-answer = 0
 # visited = []
-
+answer = 0
 def dfs(k, cnt, dungeons):
     global answer
     if cnt >= answer:
