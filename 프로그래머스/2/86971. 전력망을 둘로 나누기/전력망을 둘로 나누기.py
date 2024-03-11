@@ -1,29 +1,28 @@
 from collections import deque
 
 def solution(n, wires):
-    result = 0
+    result = n
     graph = [[] for _ in range(n+1)]
-    for a, b in wires:
+    for a,b in wires:
         graph[a].append(b)
         graph[b].append(a)
-        
-    def bfs(start):
+    
+    def bfs(x):
         visited = [False] * (n+1)
         q = deque()
-        q.append(start)
-        visited[start] = True
+        q.append(x)
+        visited[x] = True
         cnt = 1
         while q:
             s = q.popleft()
             for i in graph[s]:
                 if not visited[i]:
                     q.append(i)
-                    visited[i] = True
+                    visited[i] = 1
                     cnt += 1
         return cnt
-
-    result = n
-    for a, b in wires:
+        
+    for a,b in wires:
         graph[a].remove(b)
         graph[b].remove(a)
         
@@ -31,4 +30,5 @@ def solution(n, wires):
         
         graph[a].append(b)
         graph[b].append(a)
+    
     return result
