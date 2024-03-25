@@ -12,7 +12,7 @@ def solution(survey, choices):
         cho = choices[i]
         if 1<=cho<=3:
             s_dict[sur[0]] += c_dict[cho] 
-        elif 4<=cho<=7:
+        elif 5<=cho<=7:
             s_dict[sur[1]] += c_dict[cho]
     
     if s_dict['R'] >= s_dict['T']:
