@@ -1,13 +1,14 @@
 def solution(k, tangerine):
-    ans = 0
-    tdict = {}
+    answer = 0
+    t_dict = {}
     for tan in tangerine:
-        if tan not in tdict:
-            tdict[tan] = 1
+        if tan not in t_dict:
+            t_dict[tan] = 1
         else:
-            tdict[tan] += 1
-    tlst = sorted(tdict.items(), key=lambda x:x[1])
+            t_dict[tan] += 1
+    tlst = sorted(t_dict.items(),key = lambda x:x[1])
     while k>0:
-        k -= tlst.pop()[1]
-        ans += 1
-    return ans
+        now = tlst.pop()[1]
+        k -= now
+        answer += 1
+    return answer
