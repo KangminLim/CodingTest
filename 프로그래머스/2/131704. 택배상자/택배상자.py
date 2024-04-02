@@ -1,17 +1,16 @@
 from collections import deque
 def solution(order):
-    answer = 1
+    q = deque()
     order = deque(order)
-    stack = []
-    result = []
-    size = len(order)
-    for i in range(1, size+1):
-        stack.append(i) # 박스를 서브 컨테이너에 올리기
-        while stack:
-            if order and stack[-1] == order[0]: #서브에서 트럭으로
-                num = stack.pop()
+    answer = []
+    for i in range(1,len(order)+1):
+        q.append(i)
+        while q:
+            if q[-1] == order[0]:
+                answer.append(q.pop())
                 order.popleft()
-                result.append(num)
-            else: # 순서가 잘못된 경우
+                
+            else: 
                 break
-    return len(result)
+    
+    return len(answer)
