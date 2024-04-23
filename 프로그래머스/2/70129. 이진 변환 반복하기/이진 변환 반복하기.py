@@ -1,5 +1,5 @@
 def solution(s):
-    cnt,z_cnt = 0,0
+    cnt, z_cnt = 0, 0
     answer = []
     while True:
         # 1. x의 모든 0을 제거
@@ -10,9 +10,9 @@ def solution(s):
             else:
                 z_cnt += 1
         new_len = len(new_res)
-
+    
         t = ''
-        while new_len >0:
+        while new_len > 0:
             div = divmod(new_len,2)[0]
             mod = divmod(new_len,2)[1]
             t += str(mod)
@@ -21,4 +21,5 @@ def solution(s):
         cnt += 1
         if s == '1':
             break
+    
     return [cnt,z_cnt]
