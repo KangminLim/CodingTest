@@ -1,8 +1,8 @@
 from collections import Counter
 def solution(topping):
-    answer = 0
     left = Counter(topping)
     right = set()
+    answer = 0
     for i in topping:
         left[i] -= 1
         right.add(i)
@@ -12,5 +12,4 @@ def solution(topping):
         
         if len(left) == len(right):
             answer += 1
-        
     return answer
