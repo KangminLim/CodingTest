@@ -1,11 +1,12 @@
 def solution(elements):
-    tset = set()
-    e_len =len(elements)
-    elements = elements*2
-    for i in range(e_len):
-        # temp = elements[i]
-        # tset.add(temp)
-        for j in range(e_len):
-            temp = sum(elements[j:j+1+i])
-            tset.add(temp)
-    return len(tset)
+    answer = 0
+    aset = set()
+    elen = len(elements)
+    elements = 2 * elements
+    for i in range(elen):
+        for j in range(elen):
+            # print(elements[i:j+1])
+            tmp = sum(elements[i:i+j+1])
+            aset.add(tmp)
+        
+    return len(aset)
