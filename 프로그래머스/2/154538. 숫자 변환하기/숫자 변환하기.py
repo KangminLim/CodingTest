@@ -1,10 +1,9 @@
 from collections import deque
-
-def solution(x,y,n):
+def solution(x, y, n):
     queue = deque()
     queue.append((x,0))
     visited = set()
-    
+
     while queue:
         i, j = queue.popleft()
         if i > y or i in visited:
