@@ -1,3 +1,3 @@
 # CodingTest
 
-## Study Hard ! 
+## Study Hard ! !
