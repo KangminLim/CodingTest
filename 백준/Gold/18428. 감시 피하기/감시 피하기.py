@@ -1,68 +1,52 @@
-from itertools import combinations
-N = int(input())
-spaces, teachers, data = [], [], []
+import sys 
+input = sys.stdin.readline
 
+N = int(input())
+lst = [list(map(str,input().split())) for _ in range(N)]
+teachers, spaces = [], []
 
 for i in range(N):
-    data.append(list(input().split()))
     for j in range(N):
-        if data[i][j] == 'T':
+        if lst[i][j] == 'T':
             teachers.append((i,j))
-        if data[i][j] == 'X':
+        elif lst[i][j] == 'X':
             spaces.append((i,j))
 
-def watch(x,y,direction):
-    # 왼쪽감시
-    if direction == 0:
-        while y >= 0:
-            if data[x][y] == 'S': #학생이 있는 경우
-                return True
-            if data[x][y] == 'O':
-                return False
-            y -= 1
-    # 오른쪽감시
-    if direction == 1:
-        while y < N:
-            if data[x][y] == 'S': #학생이 있는 경우
-                return True
-            if data[x][y] == 'O':
-                return False
-            y += 1
-    # 위쪽감시
-    if direction == 2:
-        while x >= 0:
-            if data[x][y] == 'S': #학생이 있는 경우
-                return True
-            if data[x][y] == 'O':
-                return False
-            x -= 1
-    # 아래쪽감시
-    if direction == 3:
-        while x < N:
-            if data[x][y] == 'S':
-                return True
-            if data[x][y] == 'O':
-                return False
-            x += 1
-    return False
+from itertools import combinations
+di,dj = [-1,1,0,0], [0,0,-1,1]
+# 2. check 함수
+def student_check(ti,tj):
+    # 선생님의 위치에서 상하좌우로 한칸씩 점진적으로 검사
+    for dr in range(4):
+        ni,nj = ti+di[dr], tj+dj[dr]
 
-def process():
-    for x, y in teachers:
-        for i in range(4):
-            if watch(x,y,i):
-                return True
-    return False
+        while 0<=ni<N and 0<=nj<N and lst[ni][nj] != 'O':
+            # 장애물을 만나지 않고 학생을 만나면 False
+            if lst[ni][nj] == 'S':
+                return False
+            ni += di[dr]
+            nj += dj[dr]
+    return True
 
+# 1. 빈칸 중 3 공간에 장애물 설치
 find = False
+for comb in combinations(spaces,3):
+    cnt = 0
+    for ci,cj in comb:
+        lst[ci][cj] = 'O' # 장애물 설치
 
-for temp in combinations(spaces,3):
-    for x, y in temp:
-        data[x][y] = 'O'
-    if not process():
+    for ti, tj in teachers:
+        if student_check(ti,tj):
+            cnt += 1
+        else:
+            break
+
+    if cnt == len(teachers):
         find = True
         break
-    for x, y  in temp:
-        data[x][y] = 'X'
+
+    for ci, cj in comb:
+        lst[ci][cj] = 'X'
 
 if find:
     print('YES')
