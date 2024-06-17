@@ -36,7 +36,7 @@ for row in arr:
         if j==0:
             print(-1)
             exit()
-        else:
-            result = max(result,j)
+    else:
+        result = max(result,max(row))
 print(result-1)
 
