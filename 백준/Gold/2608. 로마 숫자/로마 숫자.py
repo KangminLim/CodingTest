@@ -121,6 +121,8 @@ while ans >0:
         ans_ch += 'CM'
         ans -= 900
         CM_flag = True
+        C_cnt += 1
+        M_cnt += 1
     elif ans >= 500 and not D_flag:
         ans_ch += 'D'
         ans -= 500
@@ -129,6 +131,8 @@ while ans >0:
         ans_ch += 'CD'
         ans -= 400
         CD_flag = True
+        C_cnt += 1
+        D_flag = True
     elif ans >= 100 and C_cnt < 3:
         ans_ch += 'C'
         ans -= 100
@@ -137,6 +141,8 @@ while ans >0:
         ans_ch += 'XC'
         ans -= 90
         XC_flag = True
+        X_cnt += 1
+        C_cnt += 1
     elif ans >= 50 and not L_flag:
         ans_ch += 'L'
         ans -= 50
@@ -145,6 +151,8 @@ while ans >0:
         ans_ch += 'XL'
         ans -= 40
         XL_flag = True
+        X_cnt += 1
+        L_flag = True
     elif ans >= 10 and X_cnt < 3:
         ans_ch += 'X'
         ans -= 10
@@ -153,6 +161,8 @@ while ans >0:
         ans_ch += 'IX'
         ans -= 9
         IX_flag = True
+        I_cnt += 1
+        X_cnt += 1
     elif ans >= 5 and not V_flag:
         ans_ch += 'V'
         ans -= 5
@@ -161,6 +171,8 @@ while ans >0:
         ans_ch += 'IV'
         ans -= 4
         IV_flag = True
+        I_cnt += 1
+        V_flag = True
     elif ans >= 1 and I_cnt < 3:
         ans_ch += 'I'
         ans -= 1
