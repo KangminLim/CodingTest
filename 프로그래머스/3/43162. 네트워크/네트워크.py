@@ -1,18 +1,16 @@
-def solution(n, computers):
+def solution(n, computers):        
+    answer = 0
+    v = [False] * n
     
-    def dfs(v):
-        visited[v] = True
+    def dfs(cur):
+        v[cur] = True
         for i in range(n):
-            if not visited[i] and computers[v][i]:
+            if not v[i] and computers[cur][i]: 
                 dfs(i)
         return
     
-    answer = 0
-    visited = [False] * n
-    
-    for node in range(n):
-        if not visited[node]:
-            dfs(node)
+    for i in range(n):
+        if not v[i]:
+            dfs(i)
             answer += 1
-    
     return answer
