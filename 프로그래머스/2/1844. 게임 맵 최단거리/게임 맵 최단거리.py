@@ -1,25 +1,24 @@
 from collections import deque
-def bfs(i,j):
-    dx = [0,0,1,-1]
-    dy = [1,-1,0,0]
-    q = deque()
-    q.append((i,j))
-    while q:
-        x,y = q.popleft()
-        for i in range(4):
-            nx, ny = x + dx[i], y + dy[i]
-            if 0<=nx<n and 0<=ny<m and graph[nx][ny] ==1:
-                graph[nx][ny] = graph[x][y] + 1
-                q.append((nx,ny))
-    return graph[n-1][m-1]
-
 def solution(maps):
-    global graph
-    global n,m 
-    n = len(maps)
-    m = len(maps[0])
-    graph = maps
+    N, M = len(maps), len(maps[0])
+    def bfs(ci,cj):
+        q = deque()
+        q.append((ci,cj))
+        v = [[0] * M for _ in range(N)]
+        v[ci][cj] = 1
+        
+        while q:
+            ci,cj = q.popleft()
+            if (ci,cj) == (N-1,M-1):
+                return v[N-1][M-1]
+            
+            for ni,nj in ((ci-1,cj),(ci,cj+1),(ci+1,cj),(ci,cj-1)):
+                if 0<=ni<N and 0<=nj<M and not v[ni][nj] and maps[ni][nj]:
+                    q.append((ni,nj))
+                    v[ni][nj] = v[ci][cj] + 1
+                    
+        return -1 
+    
     answer = bfs(0,0)
-    if answer <= 1:
-        return -1
+    
     return answer
