@@ -1,25 +1,23 @@
 def solution(id_list, report, k):
+    # 중복 제거
+    report = set(report)
+    report = list(report)
+    idict = {}
+    fdict = {}
+    for id in id_list:
+        idict[id] = 0
+        fdict[id] = []
+    for rep in report:
+        s, r = rep.split()
+        idict[r] += 1
+        fdict[s].append(r)
     answer = []
-    rdict = {}
-    adict = {}
-    for i in id_list:
-        rdict[i] = 0
-        adict[i] = 0
-    rset = set()
-    for r in report:
-        # 유저, 신고한 아이디
-        user,i = r.split(' ')
-        # 중복 신고 방지 
-        if (user,i) in rset: 
-            continue
-        else:
-            # 신고 내역 
-            rset.add((user,i))
-            rdict[i] += 1
+    for id in id_list:
+        tmp = 0
+        for fk in fdict:
+            if idict[fk] >= k and fk in fdict[id]:
+                tmp += 1
+        answer.append(tmp)
+                    
     
-    for user,i in rset:
-        if rdict[i] >= k:
-            adict[user] += 1
-    for k in adict:
-        answer.append(adict[k])
     return answer
