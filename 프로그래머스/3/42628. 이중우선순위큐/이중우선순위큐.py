@@ -3,25 +3,23 @@ def solution(operations):
     answer = []
     hq = []
     
-    for operation in operations:
-        alphabet, number = operation.split()
-        number = int(number)
-        
-        if alphabet == 'I':
-            heapq.heappush(hq,number)
-            
-        else: 
+    for oper in operations:
+        x, num = oper.split()
+        num = int(num)
+        if x == 'I':
+            heapq.heappush(hq,num)
+        else:
             if hq:
-                if number == -1:
-                    heapq.heappop(hq) # 최솟값을삭제
+                if num == -1:
+                    heapq.heappop(hq)
                 else:
                     hq.sort()
                     hq.pop()
-                    
+            
     hq.sort()
-    if hq: 
+    if hq:
         answer = [hq[-1],hq[0]]
     else:
         answer = [0,0]
-    
+        
     return answer
