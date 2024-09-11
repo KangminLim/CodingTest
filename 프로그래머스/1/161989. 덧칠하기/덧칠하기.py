@@ -1,21 +1,16 @@
 def solution(n, m, section):
-    arr = [True] * (n+1)
-    arr[0] = False
-    cnt = 0
+    answer = 0
+    p = [1] * (n+1)
+    for s in section:
+        p[s] = 0
     
     for s in section:
-        arr[s] = False
-    
-    start = 0
-    for i in range(1,n+1):
-        if not arr[i]:
-            start = arr[i]
-            arr[i] = True
-            cnt += 1
-            for j in range(m):
-                if i+j > n:
-                    break
-                arr[i+j] = True        
-    return cnt    
-    
+        if p[s] == 1: continue
+        else:
+            answer += 1
+            for i in range(s,s+m):  
+                if i == n+1: break
+                if p[i] == 0:
+                    p[i] = 1
+    return answer        
     
