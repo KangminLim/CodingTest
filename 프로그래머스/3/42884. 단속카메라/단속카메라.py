@@ -1,9 +1,12 @@
 def solution(routes):
-    routes.sort(key=lambda x:(x[1]))
-    camera = -30001
     answer = 0
+    routes.sort(key=lambda x:x[1])
+    last_c = -1e9
     for route in routes:
-        if camera < route[0]:
+        l_c, r_c = route
+        
+        if last_c < l_c:
+            last_c = r_c
             answer += 1
-            camera = route[1]
+        
     return answer
