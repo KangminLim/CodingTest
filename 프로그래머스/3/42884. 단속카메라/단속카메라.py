@@ -1,12 +1,14 @@
 def solution(routes):
     answer = 0
     routes.sort(key=lambda x:x[1])
-    last_c = -1e9
+    cur = 30001
+    print(routes)
     for route in routes:
-        l_c, r_c = route
-        
-        if last_c < l_c:
-            last_c = r_c
+        start, end = route
+        if cur > end: 
+            cur = end 
             answer += 1
-        
+        elif cur < start:
+            cur = end 
+            answer += 1
     return answer
