@@ -1,25 +1,24 @@
 import heapq
 def solution(operations):
     answer = []
-    hq = []
+    pq = []
+    heapq.heapify(pq)
     
-    for oper in operations:
-        x, num = oper.split()
+    for operation in operations:
+        command, num = operation.split()
         num = int(num)
-        if x == 'I':
-            heapq.heappush(hq,num)
+        if command == 'I':
+            heapq.heappush(pq,num)
         else:
-            if hq:
+            if pq:
                 if num == -1:
-                    heapq.heappop(hq)
+                    heapq.heappop(pq)
+                # max 힙 구현   
                 else:
-                    hq.sort()
-                    hq.pop()
-            
-    hq.sort()
-    if hq:
-        answer = [hq[-1],hq[0]]
+                    pq.sort()
+                    pq.pop()
+    pq.sort()
+    if not pq:
+        return [0,0]
     else:
-        answer = [0,0]
-        
-    return answer
+        return [pq[-1], pq[0]]
