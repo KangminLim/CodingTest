@@ -1,15 +1,16 @@
 def solution(s):
     s = list(map(str,s.split(' ')))
-    alst = []
-    for ch in s:
+    answer = []
+    
+    for i in range(len(s)):
         tmp = ''
-        for i in range(len(ch)):
-            if i == 0:
-                if ch[i].isalpha():
-                    tmp += ch[i].upper()
-                else:
-                    tmp += ch[i]
+        for j in range(len(s[i])):
+            if j==0:
+                tmp += s[i][j].upper()
             else:
-                tmp += ch[i].lower()
-        alst.append(tmp)
-    return ' '.join(alst)
+                tmp += s[i][j].lower()
+        answer.append(tmp)
+    
+        
+    
+    return ' '.join(answer)
