@@ -1,8 +1,12 @@
 def solution(n):
+    answer = 0
+    n_b = bin(n)[2:]
+    n_1 = n_b.count('1')
     i = n
-    tmp = i
-    b_n = bin(n)
-    while i == n:
-        tmp += 1
-        if bin(n).count('1') == bin(tmp).count('1'):
-            return tmp
+    while True:
+        i += 1 
+        tmp_b = bin(i)[2:]
+        tmp_1 = tmp_b.count('1')
+        if n_1 == tmp_1:
+            break
+    return i
