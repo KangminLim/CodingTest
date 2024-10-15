@@ -1,27 +1,27 @@
 def solution(genres, plays):
     answer = []
-    N = len(genres)
-    g_dict = {}
-    t_dict = {}
-    for i in range(N):
-        if genres[i] not in g_dict:
-            g_dict[genres[i]] = plays[i]
+    # 1. 가장 많이 재생된 장르 수록
+    gdict = {}
+    for i in range(len(genres)):
+        if genres[i] not in gdict:
+            gdict[genres[i]] = plays[i]
         else:
-            g_dict[genres[i]] += plays[i]
-        
-        if genres[i] not in t_dict:
-            t_dict[genres[i]] = [[plays[i],i]]
+            gdict[genres[i]] += plays[i]
+    # 2. 장르 내에서 많이 재생된 노래 먼저 수록
+    pdict = {}
+    for idx,val in enumerate(genres):
+        if val not in pdict:
+            pdict[val] = [(plays[idx],idx)]
         else:
-            t_dict[genres[i]].append([plays[i],i])
+            pdict[val].append((plays[idx],idx))
+    # 3. 장르 내에서 재생 회수가 같은 노래 중에서 고유 번호가 낮은 노래를 먼저 수록
+    glst = sorted(gdict.items(),key = lambda x: -x[1])
     
-    genre_rank = sorted(g_dict, key=g_dict.get, reverse = True)
+    for i in range(len(glst)):
+        genre, _ = glst[i]
+        plst = pdict[genre]
+        plst.sort(key=lambda x: (-x[0],x[1]))
+        for j in range(0,min(2,len(plst))):
+            answer.append(plst[j][1])
     
-    for x in genre_rank:
-        total_rank = sorted(t_dict[x], key= lambda x : (-x[0],x[1]))
-        
-        if len(total_rank) == 1:
-            answer.append(total_rank[0][1])
-        else:
-            for i in range(2):
-                answer.append(total_rank[i][1])
     return answer
