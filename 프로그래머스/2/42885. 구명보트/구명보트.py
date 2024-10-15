@@ -1,16 +1,18 @@
 from collections import deque
+
 def solution(people, limit):
     people.sort()
     q = deque(people)
-    ans = 0
-    while len(q) > 1:
-        if q[0] + q[-1] <= limit:
+    answer = 0
+    cur_limit = 0
+    while len(q)>1:
+        if q[-1] + q[0] <= limit:
             q.popleft()
             q.pop()
-            ans += 1
+            answer += 1
         else:
-            ans += 1
             q.pop()
+            answer += 1
     if q:
-        ans += 1
-    return ans
+        answer += 1
+    return answer
