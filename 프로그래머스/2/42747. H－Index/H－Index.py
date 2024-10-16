@@ -1,9 +1,10 @@
 def solution(citations):
+    answer = 0
     citations.sort(reverse=True)
-    length = len(citations)
-    for idx, citation in enumerate(citations):
-        if idx >= citation:
+    for idx, val in enumerate(citations):
+        if idx >= val:
             return idx
     if max(citations) == 0:
-        return 0 
-    return length
+        return 0
+    
+    return len(citations)
