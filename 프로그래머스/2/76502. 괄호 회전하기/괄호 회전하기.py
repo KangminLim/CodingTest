@@ -1,26 +1,34 @@
-def braceket(s):
-    stack = []
-    for ch in s:
-        if len(stack) == 0:
-            stack.append(ch)
-        else:
-            if stack[-1] == '(' and ch == ')':
-                stack.pop()
-            elif stack[-1] == '{' and ch == '}':
-                stack.pop()
-            elif stack[-1] == '[' and ch == ']':
-                stack.pop()
-            else:
-                stack.append(ch)
-    return True if len(stack) == 0 else False
-
 def solution(s):
+    ts = s
     answer = 0
-    for i in range(len(s)):
-        new_s = s[i:]+ s[:i]      
-        if braceket(new_s):
-            answer += 1
-    return answer
-            
+    while True:
+        flag = True
+        stack = []
+        for i in s:
+            if not stack:
+                if i == ']' or i == ')' or i == '}':
+                    flag = False
+                    break
+                else:
+                    stack.append(i)
 
-     
+            else:
+                if i == '[' or i == '(' or i == '{':
+                    stack.append(i)
+                else:
+                    if (stack[-1] == '[' and i == ']') or (stack[-1] == '{' and i == '}') or (stack[-1] == '(' and i == ')'):
+                        stack.pop()
+                    else:
+                        flag = False
+                        break
+        if flag and not stack:
+            answer += 1
+        
+        s = s[1:] + s[0]
+        
+        if s == ts:
+            break
+                    
+    
+    return answer
+
