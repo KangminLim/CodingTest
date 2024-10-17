@@ -1,17 +1,17 @@
-answer = 0
-
-def dfs(k, cnt, dungeons):
-    global answer
-    if cnt >= answer:
-        answer = max(cnt,answer)
-    for i in range(len(dungeons)):
-        if k >= dungeons[i][0] and not visited[i]:
-            visited[i] = True
-            dfs(k-dungeons[i][1], cnt+1, dungeons)
-            visited[i] = False
-
 def solution(k, dungeons):
-    global visited
-    visited = [False] * len(dungeons)
-    dfs(k,0,dungeons)
+    answer = -1
+    v = [False] * len(dungeons)
+    
+    def dfs(sm,cnt):
+        nonlocal answer
+        if cnt > answer:
+            answer = cnt
+            
+        for i in range(len(dungeons)):
+            if sm >= dungeons[i][0] and not v[i]:
+                v[i] = True
+                dfs(sm-dungeons[i][1],cnt+1)
+                v[i] = False
+    dfs(k,0)
+    
     return answer
