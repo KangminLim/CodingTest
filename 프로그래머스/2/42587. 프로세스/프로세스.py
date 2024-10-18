@@ -1,17 +1,19 @@
-from collections import deque
 def solution(priorities, location):
-    q = deque()
-    answer = 0
-    for idx, val in enumerate(priorities):
-        q.append((val,idx))
-        
-    while q:
-        item = q.popleft()
-        if q and item[0] < max(q)[0]:
-            q.append(item)
-        else:
+    answer = 0 
+    stack = []
+    for idx,val in enumerate(priorities):
+        stack.append((idx,val))
+    while stack:
+        if stack[0][1] == max(priorities):
+            priorities.pop(0)
+            cur_n, cur = stack.pop(0)
             answer += 1
-            if item[1] == location:
-                break
+            if cur_n == location:
+                return answer
+        else:
+            cur_n, cur = stack.pop(0)
+            stack.append((cur_n,cur))
+            priorities.append(priorities.pop(0))
 
+        
     return answer
