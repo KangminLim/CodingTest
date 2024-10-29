@@ -1,5 +1,5 @@
 import sys
-# input = sys.stdin.readline
+input = sys.stdin.readline
 N, M = map(int,input().split())
 tdict = {}
 
@@ -8,6 +8,6 @@ for _ in range(N):
     tdict[k] = v
 
 for _ in range(M):
-    k = str(input())
+    k = str(input().rstrip())
     print(tdict[k])
 
