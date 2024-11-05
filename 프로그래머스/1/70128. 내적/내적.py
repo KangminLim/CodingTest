@@ -1,7 +1,5 @@
 def solution(a, b):
-    sm = 0 
+    answer = 0
     for i in range(len(a)):
-        sm += (a[i] * b[i])
-    
-
-    return sm
+        answer += (a[i]*b[i])
+    return answer
