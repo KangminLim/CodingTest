@@ -7,4 +7,5 @@ def solution(skill, skill_trees):
                 s += ch
         if skill[:len(s)] == s:
             answer += 1
+                
     return answer
