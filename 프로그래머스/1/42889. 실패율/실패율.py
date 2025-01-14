@@ -1,16 +1,19 @@
 def solution(N, stages):
     answer = []
-    stages_s = []
-    l = len(stages)
-    tmp_l = l
-    # 현재 스테이지 번호
+    stages.sort()
     for i in range(1,N+1):
-        tmp = stages.count(i) 
-        if tmp_l == 0:
-            stages_s.append((0,i))
-        else:
-            stages_s.append((tmp/tmp_l,i))
-        tmp_l -= tmp
-    stages_s.sort(key=lambda x:(-x[0],x[1]))
-    answer = [x[1] for x in stages_s]
-    return answer
+        tmp = 0
+        for j in range(len(stages)):
+            if stages[j] == i:
+                tmp += 1
+            elif stages[j] > i:
+                break
+        answer.append((i,tmp/len(stages)))
+        stages = stages[j:]
+    answer.sort(key = lambda x:(-x[1]))
+    
+    result = []
+    for idx, val in answer:
+        result.append(idx)
+    
+    return result
