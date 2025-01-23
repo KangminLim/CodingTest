@@ -1,29 +1,29 @@
 from bisect import bisect_left, bisect_right
 
-def count_by_range(a,left_value,right_value):
-    right_idx = bisect_right(a,right_value)
-    left_idx = bisect_left(a,left_value)
-    return right_idx - left_idx
+# 값이 [left_value, right_value]인 데이터 개수를 반환하는 함수
+def count_by_range(a, left_value, right_value):
+    right_index = bisect_right(a, right_value)
+    left_index = bisect_left(a, left_value)
+    return right_index - left_index
+
+array = [[] for _ in range(10001)]
+reversed_array  = [[] for _ in range(10001)]
 
 def solution(words, queries):
     answer = []
-    
-    arr = [[] for _ in range(10001)]
-    re_arr = [[] for _ in range(10001)]
-    
-    # 모든 단어를 접미사 와일드카드 배열, 접두사를 와일드카드 배열에 각각 삽입
     for word in words:
-        arr[len(word)].append(word)
-        re_arr[len(word)].append(word[::-1])
+        array[len(word)].append(word)
+        reversed_array[len(word)].append(word[::-1])
 
-    for i in range(10001): # 이진 탐색을 위한 정렬
-        arr[i].sort()
-        re_arr[i].sort()
-    
+    for i in range(10001):
+        array[i].sort()
+        reversed_array[i].sort()
+
     for q in queries:
-        if q[0] != '?': 
-            res = count_by_range(arr[len(q)], q.replace('?','a'), q.replace('?','z'))
+        if q[0] != '?':
+            res = count_by_range(array[len(q)], q.replace('?','a'),q.replace('?','z'))
         else:
-            res = count_by_range(re_arr[len(q)], q[::-1].replace('?','a'), q[::-1].replace('?','z'))
+            res = count_by_range(reversed_array[len(q)], q[::-1].replace('?','a'),q[::-1].replace('?','z'))
         answer.append(res)
+
     return answer
