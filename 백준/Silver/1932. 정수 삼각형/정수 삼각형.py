@@ -1,12 +1,17 @@
 N = int(input())
-lst = [list(map(int,input().split())) for _ in range(N)]
-for i in range(1,N):
-    for j in range(len(lst[i])):
-        if j == 0:
-            lst[i][j] += lst[i-1][j]
-        elif j == len(lst[i])-1:
-            lst[i][j] += lst[i-1][j-1]
-        else:
-            lst[i][j] = max(lst[i-1][j-1],lst[i-1][j])+lst[i][j]
+arr = []
+for _ in range(N):
+    arr.append(list(map(int,input().split())))
 
-print(max(lst[-1]))
+for i in range(1,N):
+    for j in range(N):
+        if j > i: break
+        # print(i,j)
+        if j == 0:
+            arr[i][j] = arr[i-1][j] + arr[i][j]
+        elif j == i:
+            arr[i][j] = arr[i-1][j-1] + arr[i][j]
+        else:
+            arr[i][j] = max(arr[i-1][j-1],arr[i-1][j]) + arr[i][j]
+        # print(arr)
+print(max(map(max,arr)))
